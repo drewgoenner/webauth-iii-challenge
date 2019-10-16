@@ -1,10 +1,11 @@
 const express = require('express');
 const protected = require('./restricted-middleware.js');
+const checkDept = require('./check-department-middleware')
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 
 const generateToken = require('./generate-token.js')
 const Users = require('./user-model.js');
+
 
 const router = express.Router();
 
@@ -50,7 +51,8 @@ router.post('/login', (req, res) => {
     
 });
 
-router.get('/users', protected, (req, res) => {
+router.get('/users', protected, checkDept('management'), (req, res) => {
+  
     Users.find()
       .then(users => {
           res.json(users);

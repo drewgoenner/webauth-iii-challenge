@@ -12,7 +12,10 @@ function protected(req, res, next) {
             if(err) {
             res.status(401).json({ message: 'Invalid Credentials'})
             } else {
-                req.user = {username: decodedToken.username, department: decodedToken.department}
+                req.user = {
+                    username: decodedToken.username,
+                    department: decodedToken.department
+                };
                 next();
             }
         })
