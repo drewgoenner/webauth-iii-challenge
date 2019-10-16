@@ -55,6 +55,7 @@ router.get('/users', protected, checkDept('management'), (req, res) => {
   
     Users.find()
       .then(users => {
+         
           res.json(users);
       })
       .catch(err => {
